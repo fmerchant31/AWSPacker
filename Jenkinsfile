@@ -9,7 +9,7 @@ pipeline{
                     url: 'git@github.com:fmerchant31/AWSPacker.git'
 		    }}
         }
-        stage('Creating AWS Launch Template using Packer Image'){
+        stage('Creating AWS Launch Template using Packer Image '){
               steps{
 		   withAWS(credentials:'aws-credentials'){
 			   script{
