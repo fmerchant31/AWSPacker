@@ -11,11 +11,11 @@ pipeline{
         stage('Creating AWS Launch Template using Packer Image'){
               steps{
                    script{
-			
+			   withAWS(credentials:'aws-credentials'){
 			        AMI_ID = sh ( 
 				        script: "aws ec2 describe-images --region ap-south-1 --query 'reverse(sort_by(Images,&CreationDate))[:1].{ImageId:ImageId}' --output text",
 				        returnStdout: true).trim()
-			        echo "ID : ${AMI_ID}"
+				   echo "ID : ${AMI_ID}"}
                    }
               }
         }
