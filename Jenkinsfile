@@ -3,10 +3,11 @@ pipeline{
     stages{
         stage('Checkout external proj') {
             steps {
+		    script{
                 git branch: 'main',
                     credentialsId: 'f845af59-d281-4b2d-9170-2eca1a1a0b63', 
                     url: 'git@github.com:fmerchant31/AWSPacker.git'
-            }
+		    }}
         }
         stage('Creating AWS Launch Template using Packer Image'){
               steps{
