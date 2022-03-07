@@ -17,6 +17,7 @@ pipeline{
 				        script: "aws ec2 describe-images --region ap-south-1 --query 'reverse(sort_by(Images,&CreationDate))[:1].{ImageId:ImageId}' --output text",
 				        returnStdout: true).trim()
 				   echo "ID : ${AMI_ID}"
+			      }
 		      }
                    }
                    }
