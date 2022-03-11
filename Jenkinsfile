@@ -21,7 +21,7 @@ pipeline{
 		      if(params.Select == 'Launch Template'){
 			   	sh (
 					//script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --launch-template-data ImageId='${AMI_ID}'"
-					script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --tag-specifications 'ResourceType=launch-template,Tags=[{Key=purpose,Value=production}]'  --launch-template-data '{"ImageId":"${AMI_ID}","InstanceType":"t2.micro"}' --region ap-south-1"
+					script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --tag-specifications 'ResourceType=launch-template,Tags=[{Key=purpose,Value=production}]'  --launch-template-data "{'ImageId':'${AMI_ID}','InstanceType':'t2.micro'}" --region ap-south-1"
 				)
 			}
 			else{
