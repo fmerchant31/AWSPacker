@@ -26,7 +26,7 @@ pipeline{
 				}
 				else{
 					Template_ID = sh(
-						aws ec2 describe-launch-templates --filters 'Name=tag:purpose,Values=productio' --query 'LaunchTemplates[].LaunchTemplateId' --output text,
+						aws ec2 describe-launch-templates --filters 'Name=tag:purpose,Values=production' --query 'LaunchTemplates[].LaunchTemplateId' --output text,
 						 returnStdout: true).trim()
 					
 					echo "Template Id: ${Template_ID}"
