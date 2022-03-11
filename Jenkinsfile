@@ -13,22 +13,22 @@ pipeline{
               steps{
 		   
 			   script{
-			        AMI_ID = sh ( 
+			       /* AMI_ID = sh ( 
 				        script: "aws ec2 describe-images --region ap-south-1 --query 'reverse(sort_by(Images,&CreationDate))[:1].{ImageId:ImageId}' --output text",
 				        returnStdout: true).trim()
-				   echo "ID : ${AMI_ID}"
+				   echo "ID : ${AMI_ID}"*/
 			   
-		     	    if($params.Select == 'Launch Template'){
-			   	sh (
-					//script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --launch-template-data ImageId='${AMI_ID}'"
-					script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --tag-specifications 'ResourceType=launch-template,Tags=[{Key=purpose,Value=production}]'  --launch-template-data ImageId='${AMI_ID}' "
-				)
-			}
-			else{
-				sh(
-			   		script: "aws ec2 create-launch-template-version --launch-template-id $params.TemplateID --launch-template-data ImageId='${AMI_ID}'"
-				)   
-			}  
+		     	    	if($params.Select == 'Launch Template'){
+			   		sh (
+						//script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --launch-template-data ImageId='${AMI_ID}'"
+						script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --tag-specifications 'ResourceType=launch-template,Tags=[{Key=purpose,Value=production}]'  --launch-template-data ImageId='ami-0da79b55820f19751' "
+					)
+				}
+				else{
+					sh(
+			   			script: "aws ec2 create-launch-template-version --launch-template-id $params.TemplateID --launch-template-data ImageId='${AMI_ID}'"
+					)   
+				}  
 			   }
                    }
              }
