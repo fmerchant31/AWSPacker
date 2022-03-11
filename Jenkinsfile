@@ -25,9 +25,15 @@ pipeline{
 					)
 				}
 				else{
+					Template_ID = sh(
+						aws ec2 describe-launch-templates --filters "Name=tag:purpose,Values=production" --query 'LaunchTemplates[].LaunchTemplateId' --output text,
+						 returnStdout: true).trim()
+					
+					echo "Template Id: ${Template_ID}"
+					
 					sh(
-			   			script: "aws ec2 create-launch-template-version --launch-template-id $params.TemplateID --launch-template-data ImageId='${AMI_ID}'"
-					)   
+			   			script: "aws ec2 create-launch-template-version --launch-template-id '${Template_ID}' --launch-template-data ImageId='${AMI_ID}'"
+					)	
 				}  
 			   }
                    }
