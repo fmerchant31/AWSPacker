@@ -32,7 +32,7 @@ pipeline{
 					echo "Template Id: ${Template_ID}"
 					
 					sh(
-			   			script: "aws ec2 create-launch-template-version --launch-template-id '${Template_ID}' --launch-template-data ImageId='${AMI_ID}'"
+			   			script: "aws ec2 create-launch-template-version --launch-template-id '${Template_ID}' --launch-template-data ImageId='ami-0da79b55820f19751'"
 					)	
 				}  
 			   }
