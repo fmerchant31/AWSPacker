@@ -21,7 +21,9 @@ pipeline{
 		     	    	if(params.Select == 'Launch Template'){
 			   		sh (
 						//script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --launch-template-data ImageId='${AMI_ID}'"
-						script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --tag-specifications 'ResourceType=launch-template,Tags=[{Key=purpose,Value=production}]' --launch-template-data ImageId='ami-0da79b55820f19751' --launch-template-data InstanceType='t2.micro'"
+						script: "aws ec2 create-launch-template --launch-template-name $params.TemplateName --tag-specifications 'ResourceType=launch-template,Tags=[{Key=purpose,Value=production}]' --launch-template-data ImageId='ami-0da79b55820f19751',InstanceType='t2.micro'"
+						             //--launch-template-data '{"TagSpecifications":[{"ResourceType":"instance","Tags":[{"Key":"purpose","Value":"webserver"}]}],"ImageId":"ami-04d5cc9b88example","InstanceType":"t2.micro"}'
+
 					)
 					/*sh(
 						script:"aws autoscaling create-auto-scaling-group --auto-scaling-group-name $params.ASGName --launch-template LaunchTemplateName=$params.TemplateName --min-size 1 --max-size 1 --availability-zones ap-south-1a"
